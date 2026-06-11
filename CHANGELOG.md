@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] - Architectural Resilience & AI Structured Outputs
+## [1.0.0] - 2026-06-11 - Final Submission & Architecture Resilience
 
 ### Added
 - **Structured Target Tags**: Upgraded the Vercel AI SDK implementation to generate a strict JSON array of `targetTags` via Zod schema, rather than relying on brittle Regex string matching to identify target audiences.
@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - **Database Schema**: Added `targetTags` column to the `CampaignSuggestion` Prisma model to store the structured array securely in the database.
 - **Audience Resolution**: Completely refactored `/api/campaigns/execute` to parse the new `targetTags` array directly when filtering the database, completely eradicating the old `suggestion.suggestedSegment.match(/'([^']+)'/g)` regex guesswork.
 
-## [Unreleased] - UI/UX & Mobile Polish Update
+## [0.9.0] - 2026-06-10 - UI/UX & Mobile Polish Update
 
 ### Added
 - **Glassmorphism Aesthetic**: Upgraded all cards across the Insights Feed and Audience Directory to use a premium dark glassmorphic design (`bg-[#050505]/60 backdrop-blur-2xl`).
@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file.
 - **Z-Index Blur Fix 2**: Fixed a specific CSS layering bug where the `backdrop-blur` on the search input was inadvertently blurring the absolute-positioned search SVG behind it.
 - **Mobile Two-Tap Interactions**: Redesigned the `CopyableEmail` element specifically for touch devices, introducing a smart "first tap shows tooltip, second tap copies" interaction flow to bypass the lack of native hover states.
 
-## [Unreleased] - Premium Engine & Campaigns Overhaul
+## [0.8.0] - 2026-06-09 - Premium Engine & Campaigns Overhaul
 
 ### Added
 - **Mock Login Portal**: Built a dedicated, immersive glassmorphic login screen at `/login` designed specifically for the recruiter demo video. It bypasses the sidebar layout entirely and includes an architectural disclaimer regarding Clerk Auth.
