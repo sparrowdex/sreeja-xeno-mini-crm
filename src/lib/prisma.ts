@@ -10,13 +10,23 @@ import path from 'path'
 const isProd = process.env.NODE_ENV === 'production'
 const dbPath = isProd ? '/tmp/dev.db' : path.join(process.cwd(), 'prisma/dev.db')
 
-if (isProd && !fs.existsSync('/tmp/dev.db')) {
+if (isProd) {
   const sourcePath = path.join(process.cwd(), 'prisma', 'dev.db')
-  if (fs.existsSync(sourcePath)) {
-    fs.copyFileSync(sourcePath, '/tmp/dev.db')
-    // Vercel's source filesystem is read-only, so the copied file inherits those permissions.
-    // We must explicitly make the copied file writable!
-    fs.chmodSync('/tmp/dev.db', 0o666)
+  if (!fs.existsSync('/tmp/dev.db')) {
+    if (fs.existsSync(sourcePath)) {
+      fs.copyFileSync(sourcePath, '/tmp/dev.db')
+    }
+  }
+  
+  // Unconditionally ensure the file is writable. 
+  // If Vercel re-uses a warm lambda from the previous broken deployment,
+  // the file exists but is read-only. We must fix its permissions every time!
+  if (fs.existsSync('/tmp/dev.db')) {
+    try {
+      fs.chmodSync('/tmp/dev.db', 0o666)
+    } catch (e) {
+      console.error('Failed to chmod /tmp/dev.db', e)
+    }
   }
 }
 
