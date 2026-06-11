@@ -1,0 +1,81 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  tags      String?  // Storing as JSON string: e.g. ["high-value", "churn-risk"]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders            Order[]
+  communicationLogs CommunicationLog[]
+}
+
+model Order {
+  id         String   @id @default(uuid())
+  customerId String
+  amount     Float
+  status     String   // completed, refunded, cancelled
+  orderDate  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model Segment {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  rules       String   // Storing as JSON string representing the filter logic
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  campaigns Campaign[]
+}
+
+model Campaign {
+  id              String   @id @default(uuid())
+  name            String
+  segmentId       String
+  messageTemplate String
+  status          String   // draft, sending, completed
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  segment           Segment            @relation(fields: [segmentId], references: [id])
+  communicationLogs CommunicationLog[]
+}
+
+model CommunicationLog {
+  id           String   @id @default(uuid())
+  campaignId   String
+  customerId   String
+  channel      String   // whatsapp, email, sms
+  status       String   // sent, delivered, opened, clicked, failed
+  dispatchedAt DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model CampaignSuggestion {
+  id               String   @id @default(uuid())
+  title            String
+  reasoning        String
+  suggestedSegment String   // JSON representation or description of the audience
+  targetTags       String   // JSON stringified array of tags (e.g. '["high-value"]')
+  suggestedMessage String
+  status           String   // pending, accepted, rejected
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
