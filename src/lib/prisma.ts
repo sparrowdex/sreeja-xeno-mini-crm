@@ -1,9 +1,24 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
 
-// Prisma 7 adapter API takes a config object with `url`, not a raw Database instance!
+import fs from 'fs'
+import path from 'path'
+
+// Vercel serverless functions are read-only except for the /tmp directory.
+// For the prototype to work (writing webhooks/campaigns), we must copy the 
+// seeded DB to /tmp on cold boot.
+const isProd = process.env.NODE_ENV === 'production'
+const dbPath = isProd ? '/tmp/dev.db' : path.join(process.cwd(), 'prisma/dev.db')
+
+if (isProd && !fs.existsSync('/tmp/dev.db')) {
+  const sourcePath = path.join(process.cwd(), 'prisma', 'dev.db')
+  if (fs.existsSync(sourcePath)) {
+    fs.copyFileSync(sourcePath, '/tmp/dev.db')
+  }
+}
+
 const adapter = new PrismaBetterSqlite3({
-  url: process.env.DATABASE_URL || 'file:./prisma/dev.db',
+  url: process.env.DATABASE_URL || `file:${dbPath}`,
 })
 
 const prismaClientSingleton = () => {
