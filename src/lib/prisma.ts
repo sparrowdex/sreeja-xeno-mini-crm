@@ -1,38 +1,25 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-
+import Database from 'better-sqlite3'
 import fs from 'fs'
 import path from 'path'
 
-// Vercel serverless functions are read-only except for the /tmp directory.
-// For the prototype to work (writing webhooks/campaigns), we must copy the 
-// seeded DB to /tmp on cold boot.
 const isProd = process.env.NODE_ENV === 'production'
 const dbPath = isProd ? '/tmp/dev.db' : path.join(process.cwd(), 'prisma/dev.db')
 
 if (isProd) {
   const sourcePath = path.join(process.cwd(), 'prisma', 'dev.db')
-  if (!fs.existsSync('/tmp/dev.db')) {
-    if (fs.existsSync(sourcePath)) {
-      fs.copyFileSync(sourcePath, '/tmp/dev.db')
-    }
+  if (!fs.existsSync('/tmp/dev.db') && fs.existsSync(sourcePath)) {
+    fs.copyFileSync(sourcePath, '/tmp/dev.db')
   }
-  
-  // Unconditionally ensure the file is writable. 
-  // If Vercel re-uses a warm lambda from the previous broken deployment,
-  // the file exists but is read-only. We must fix its permissions every time!
   if (fs.existsSync('/tmp/dev.db')) {
-    try {
-      fs.chmodSync('/tmp/dev.db', 0o666)
-    } catch (e) {
-      console.error('Failed to chmod /tmp/dev.db', e)
-    }
+    try { fs.chmodSync('/tmp/dev.db', 0o666) } catch (e) {}
   }
 }
 
-const adapter = new PrismaBetterSqlite3({
-  url: process.env.DATABASE_URL || `file:${dbPath}`,
-})
+// Ignore process.env.DATABASE_URL completely to prevent Vercel from overriding this!
+// In Prisma 7, the adapter takes a config object with a url property, not a database instance.
+const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` })
 
 const prismaClientSingleton = () => {
   return new PrismaClient({ adapter })

@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 - **Audience Resolution**: Completely refactored `/api/campaigns/execute` to parse the new `targetTags` array directly when filtering the database, completely eradicating the old `suggestion.suggestedSegment.match(/'([^']+)'/g)` regex guesswork.
 
 ### Fixed
-- **Vercel SQLite Read-Only Deployment**: Resolved a critical production bug where the Vercel serverless environment locked the SQLite `.db` file with read-only permissions (`0o444`). Implemented an initialization hook in `prisma.ts` to copy the database to the writable `/tmp` directory and execute `fs.chmodSync` to explicitly force read/write capabilities, ensuring full CRUD operations function flawlessly on the live demo.
+- **Vercel SQLite Read-Only Deployment**: Resolved a critical production bug where the Vercel serverless environment locked the SQLite `.db` file with read-only permissions (`0o444`). Implemented an initialization hook in `prisma.ts` to copy the database to the writable `/tmp` directory and execute `fs.chmodSync` to explicitly force read/write capabilities. Additionally patched an advanced edge-case where Vercel re-uses "warm" lambda containers from previous broken deployments, by forcing unconditional `chmodSync` execution to unlock cached read-only databases, ensuring full CRUD operations function flawlessly on the live demo.
 
 ## [0.9.0] - 2026-06-10 - UI/UX & Mobile Polish Update
 
