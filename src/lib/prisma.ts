@@ -14,6 +14,9 @@ if (isProd && !fs.existsSync('/tmp/dev.db')) {
   const sourcePath = path.join(process.cwd(), 'prisma', 'dev.db')
   if (fs.existsSync(sourcePath)) {
     fs.copyFileSync(sourcePath, '/tmp/dev.db')
+    // Vercel's source filesystem is read-only, so the copied file inherits those permissions.
+    // We must explicitly make the copied file writable!
+    fs.chmodSync('/tmp/dev.db', 0o666)
   }
 }
 
