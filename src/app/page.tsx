@@ -143,14 +143,14 @@ export default async function Home({
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5 mb-5 md:mb-6">
                 <div className="p-4 md:p-6 bg-white/[0.02] rounded-2xl border border-white/5 group-hover:border-white/10 transition-colors relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500"></div>
                   <h4 className="text-sm font-medium text-blue-300/80 mb-2 relative z-10">
                     Target Audience
                   </h4>
                   <p className="text-sm md:text-base font-semibold text-zinc-200 relative z-10">{suggestion.suggestedSegment}</p>
                 </div>
                 <div className="p-4 md:p-6 bg-blue-950/20 rounded-2xl border border-blue-500/10 group-hover:border-blue-500/20 transition-colors relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500"></div>
                   <h4 className="text-sm font-medium text-blue-300 mb-2 relative z-10 flex items-center justify-between">
                     Message Draft
                     <span className="px-1.5 py-0.5 bg-green-500/10 text-green-400 border border-green-500/20 rounded text-[9px] uppercase tracking-wider font-bold">WHATSAPP</span>

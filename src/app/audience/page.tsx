@@ -84,7 +84,7 @@ export default async function AudiencePage({
             return (
               <div
                 key={customer.id}
-                className="min-w-0 animate-fade-in-up bg-[#050505]/60 backdrop-blur-2xl border border-white/5 rounded-[24px] p-4 md:p-5 shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all hover:bg-white/[0.04] hover:border-white/10 hover:-translate-y-0.5 flex flex-col gap-3 md:gap-4 group/card"
+                className="min-w-0 animate-fade-in-up bg-white/[0.04] md:bg-[#050505]/60 backdrop-blur-2xl border border-white/10 md:border-white/5 rounded-[24px] p-4 md:p-5 shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all md:hover:bg-white/[0.04] md:hover:border-white/10 md:hover:-translate-y-0.5 flex flex-col gap-3 md:gap-4 group/card"
                 style={{ animationDelay: `${index * 40}ms` }}
               >
                 <div className="flex items-center gap-2 md:gap-4">

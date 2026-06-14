@@ -152,7 +152,7 @@ export default async function CampaignsPage() {
                   </div>
 
                   <div className="bg-black/20 p-3 md:p-4 rounded-xl border border-white/5 relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"></div>
                     <p className="text-[10px] md:text-xs font-semibold text-blue-200/50 uppercase tracking-wider relative z-10">Opened</p>
                     <p className="text-xl md:text-3xl font-bold mt-1 md:mt-2 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.3)] relative z-10">{opened}</p>
                     <p className="text-[9px] md:text-xs text-blue-200/50 mt-1 relative z-10">{openedRate}% of delivered</p>
@@ -160,7 +160,7 @@ export default async function CampaignsPage() {
                   </div>
 
                   <div className="bg-black/20 p-3 md:p-4 rounded-xl border border-white/5 relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"></div>
                     <p className="text-[10px] md:text-xs font-semibold text-blue-200/50 uppercase tracking-wider relative z-10">Clicked</p>
                     <p className="text-xl md:text-3xl font-bold mt-1 md:mt-2 text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.3)] relative z-10">{clicked}</p>
                     <p className="text-[9px] md:text-xs text-blue-200/50 mt-1 relative z-10">{clickedRate}% of opened</p>
