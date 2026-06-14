@@ -3,11 +3,11 @@ import { LogoIcon } from '@/components/Logo';
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden w-full h-full">
+    <div className="min-h-[100dvh] flex items-center justify-center relative overflow-hidden w-full h-full -mt-16 md:mt-0">
       {/* Background grids and blurs specific to login */}
-      <div className="absolute inset-0 bg-black z-[-10]"></div>
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)] pointer-events-none z-[-5]"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-blue-600/20 blur-[100px] rounded-full pointer-events-none z-[-5]"></div>
+      <div className="fixed inset-0 bg-black z-[-10]"></div>
+      <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)] pointer-events-none z-[-5]"></div>
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-blue-600/20 blur-[100px] rounded-full pointer-events-none z-[-5]"></div>
 
       <div className="relative z-10 w-full max-w-md p-6 md:p-8 bg-[#050505]/80 backdrop-blur-3xl border border-white/10 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.8)] text-center mx-4 animate-fade-in-up">
         <div className="mx-auto w-16 h-16 bg-blue-500/10 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(59,130,246,0.2)]">

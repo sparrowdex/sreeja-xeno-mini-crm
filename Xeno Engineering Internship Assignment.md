@@ -1,6 +1,3 @@
-Here is the complete, unfiltered text from the **Xeno Engineering Internship Assignment - 2026.pdf** converted into clean Markdown. You can copy and paste this directly into a file named `XENO_ASSIGNMENT_BRIEF.md` in your project for your coding assistant to reference.
-
----
 
 # ΧΕΝΟ Engineering Take-Home Assignment
 
